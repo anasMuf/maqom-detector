@@ -1,0 +1,134 @@
+> nx run api:dev
+
+> pnpm run dev
+
+
+> api@1.0.0 dev /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api
+> go run github.com/air-verse/air@latest
+
+go: downloading github.com/air-verse/air v1.65.1
+go: github.com/air-verse/air@v1.65.1 requires go >= 1.25; switching to go1.25.10
+go: downloading dario.cat/mergo v1.0.2
+go: downloading github.com/fsnotify/fsnotify v1.9.0
+go: downloading github.com/gohugoio/hugo v0.149.1
+go: downloading github.com/andybalholm/brotli v1.2.0
+go: downloading github.com/pelletier/go-toml v1.9.5
+go: downloading golang.org/x/sys v0.35.0
+go: downloading github.com/bep/godartsass/v2 v2.5.0
+go: downloading github.com/bep/golibsass v1.2.0
+go: downloading github.com/tdewolff/parse/v2 v2.8.3
+go: downloading github.com/pelletier/go-toml/v2 v2.2.4
+go: downloading golang.org/x/text v0.28.0
+go: downloading github.com/spf13/afero v1.14.0
+go: downloading github.com/spf13/cast v1.9.2
+go: downloading google.golang.org/protobuf v1.36.8
+go: downloading github.com/gobwas/glob v0.2.3
+[warning] build.bin is deprecated; set build.entrypoint instead
+
+  __    _   ___  
+ / /\  | | | |_) 
+/_/--\ |_| |_| \_ v1.65.1, built with Go go1.25.10
+
+[32mmkdir /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/tmp
+[0m[36mwatching .
+[0m[36mwatching config
+[0m[36m!exclude docs
+[0m[36mwatching dto
+[0m[36mwatching handler
+[0m[36mwatching middleware
+[0m[36mwatching model
+[0m[36mwatching repository
+[0m[36mwatching seeders
+[0m[36mwatching service
+[0m[36m!exclude tmp
+[0m[36mwatching utility
+[0m[33mbuilding...
+[0m[32mrunning...
+[0m
+2026/05/11 12:24:45 [32m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/config/database.go:37 [33mSLOW SQL >= 200ms
+[0m[31;1m[355.820ms] [33m[rows:1][35m SELECT current_database()[0m
+PostgreSQL benar-benar connect ke: myapp_db
+2026/05/11 12:24:45 Berhasil koneksi ke database PostgreSQL via GORM
+
+2026/05/11 12:24:45 [32m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/main.go:43 [33mSLOW SQL >= 200ms
+[0m[31;1m[321.622ms] [33m[rows:1][35m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND table_type = 'BASE TABLE'[0m
+
+2026/05/11 12:24:46 [32m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/main.go:43 [33mSLOW SQL >= 200ms
+[0m[31;1m[989.398ms] [33m[rows:-][35m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'myapp_db' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'[0m
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ [31mv4.15.2[0m
+High performance, minimalist Go web framework
+[34mhttps://echo.labstack.com[0m
+____________________________________O/_______
+                                    O\
+⇨ http server started on [32m[::]:8080[0m
+[36mINFO[0m[0064] incoming request                              [36mat[0m="2026-05-11 12:25:48" [36mip[0m="[::1]:51776" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[0064] incoming request                              [36mat[0m="2026-05-11 12:25:48" [36mip[0m="[::1]:51776" [36mmethod[0m=POST [36muri[0m=/api/users/register
+[31mERRO[0m[0064] Key: 'CreateUserRequest.Phone' Error:Field validation for 'Phone' failed on the 'max' tag  [31mat[0m="2026-05-11 12:25:48" [31mip[0m="[::1]:51776" [31mmethod[0m=POST [31muri[0m=/api/users/register
+[35mutility/validator.go has changed
+[0m[33mbuilding...
+[0m[32mrunning...
+[0mPostgreSQL benar-benar connect ke: myapp_db
+2026/05/11 12:26:36 Berhasil koneksi ke database PostgreSQL via GORM
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ [31mv4.15.2[0m
+High performance, minimalist Go web framework
+[34mhttps://echo.labstack.com[0m
+____________________________________O/_______
+                                    O\
+⇨ http server started on [32m[::]:8080[0m
+[36mINFO[0m[0032] incoming request                              [36mat[0m="2026-05-11 12:27:08" [36mip[0m="[::1]:52146" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[0032] incoming request                              [36mat[0m="2026-05-11 12:27:08" [36mip[0m="[::1]:52146" [36mmethod[0m=POST [36muri[0m=/api/users/register
+[31mERRO[0m[0032] Phone must be at most 15 characters           [31mat[0m="2026-05-11 12:27:08" [31mip[0m="[::1]:52146" [31mmethod[0m=POST [31muri[0m=/api/users/register
+[36mINFO[0m[0062] incoming request                              [36mat[0m="2026-05-11 12:27:39" [36mip[0m="[::1]:52146" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[0062] incoming request                              [36mat[0m="2026-05-11 12:27:39" [36mip[0m="[::1]:52146" [36mmethod[0m=POST [36muri[0m=/api/users/register
+
+2026/05/11 12:27:39 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:28 [35;1mrecord not found
+[0m[33m[26.148ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE email = 'devunusudo@mailinator.com' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:27:39 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:34 [35;1mrecord not found
+[0m[33m[0.733ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE username = 'vilovimev' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+[36mINFO[0m[0068] incoming request                              [36mat[0m="2026-05-11 12:27:45" [36mip[0m="[::1]:52146" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/login
+[36mINFO[0m[0068] incoming request                              [36mat[0m="2026-05-11 12:27:45" [36mip[0m="[::1]:52146" [36mmethod[0m=POST [36muri[0m=/api/users/login
+[36mINFO[0m[1541] incoming request                              [36mat[0m="2026-05-11 12:52:17" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[1541] incoming request                              [36mat[0m="2026-05-11 12:52:17" [36mip[0m="[::1]:59012" [36mmethod[0m=POST [36muri[0m=/api/users/register
+
+2026/05/11 12:52:17 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:28 [35;1mrecord not found
+[0m[33m[50.887ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE email = 'lyzevomanu@mailinator.com' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:52:17 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:34 [35;1mrecord not found
+[0m[33m[1.879ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE username = 'juxoryjo' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+[36mINFO[0m[1586] incoming request                              [36mat[0m="2026-05-11 12:53:03" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[1586] incoming request                              [36mat[0m="2026-05-11 12:53:03" [36mip[0m="[::1]:59012" [36mmethod[0m=POST [36muri[0m=/api/users/register
+
+2026/05/11 12:53:03 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:28 [35;1mrecord not found
+[0m[33m[8.509ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE email = 'solevibyv@mailinator.com' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:53:03 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:34 [35;1mrecord not found
+[0m[33m[0.600ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE username = 'gomunih' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+[36mINFO[0m[1618] incoming request                              [36mat[0m="2026-05-11 12:53:35" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/login
+[36mINFO[0m[1618] incoming request                              [36mat[0m="2026-05-11 12:53:35" [36mip[0m="[::1]:59012" [36mmethod[0m=POST [36muri[0m=/api/users/login
+[31mERRO[0m[1618] Invalid email or password                     [31mat[0m="2026-05-11 12:53:35" [31mip[0m="[::1]:59012" [31mmethod[0m=POST [31muri[0m=/api/users/login
+[36mINFO[0m[1740] incoming request                              [36mat[0m="2026-05-11 12:55:37" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[1740] incoming request                              [36mat[0m="2026-05-11 12:55:37" [36mip[0m="[::1]:59012" [36mmethod[0m=POST [36muri[0m=/api/users/register
+[31mERRO[0m[1740] email already exists                          [31mat[0m="2026-05-11 12:55:37" [31mip[0m="[::1]:59012" [31mmethod[0m=POST [31muri[0m=/api/users/register
+[36mINFO[0m[1747] incoming request                              [36mat[0m="2026-05-11 12:55:43" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[1747] incoming request                              [36mat[0m="2026-05-11 12:55:43" [36mip[0m="[::1]:59012" [36mmethod[0m=POST [36muri[0m=/api/users/register
+
+2026/05/11 12:55:43 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:28 [35;1mrecord not found
+[0m[33m[1.163ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE email = 'solevibyv2@mailinator.com' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:55:43 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:34 [35;1mrecord not found
+[0m[33m[1.713ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE username = 'migivaty' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+[36mINFO[0m[1756] incoming request                              [36mat[0m="2026-05-11 12:55:53" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/login
+[36mINFO[0m[1757] incoming request                              [36mat[0m="2026-05-11 12:55:53" [36mip[0m="[::1]:59012" [36mmethod[0m=POST [36muri[0m=/api/users/login
+[36mINFO[0m[1757] incoming request                              [36mat[0m="2026-05-11 12:55:53" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users
+[36mINFO[0m[1757] incoming request                              [36mat[0m="2026-05-11 12:55:53" [36mip[0m="[::1]:59012" [36mmethod[0m=GET [36muri[0m=/api/users
+[36mINFO[0m[1767] incoming request                              [36mat[0m="2026-05-11 12:56:03" [36mip[0m="[::1]:59012" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/login
+[36mINFO[0m[1767] incoming request                              [36mat[0m="2026-05-11 12:56:03" [36mip[0m="[::1]:59012" [36mmethod[0m=POST [36muri[0m=/api/users/login

@@ -1,0 +1,44 @@
+> nx run api:dev
+
+> pnpm run dev
+
+
+> api@1.0.0 dev /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api
+> go run main.go
+
+PostgreSQL benar-benar connect ke: myapp_db
+2026/05/11 12:17:48 Berhasil koneksi ke database PostgreSQL via GORM
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ [31mv4.15.2[0m
+High performance, minimalist Go web framework
+[34mhttps://echo.labstack.com[0m
+____________________________________O/_______
+                                    O\
+⇨ http server started on [32m[::]:8080[0m
+[36mINFO[0m[0136] incoming request                              [36mat[0m="2026-05-11 12:20:04" [36mip[0m="[::1]:50378" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[0136] incoming request                              [36mat[0m="2026-05-11 12:20:04" [36mip[0m="[::1]:50378" [36mmethod[0m=POST [36muri[0m=/api/users/register
+
+2026/05/11 12:20:04 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:28 [35;1mrecord not found
+[0m[33m[31.630ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE email = 'vutyla@mailinator.com' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:20:04 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:34 [35;1mrecord not found
+[0m[33m[0.714ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE username = 'sokef' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:20:04 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:39 [35;1mERROR: value too long for type character varying(15) (SQLSTATE 22001)
+[0m[33m[7.687ms] [34;1m[rows:0][0m INSERT INTO "users" ("full_name","email","password","username","phone","address","role","deposit","created_at","updated_at","deleted_at") VALUES ('Joel Oliver','vutyla@mailinator.com','$2a$10$kObXqrMW4jeUHIQBov9LV.oBEelUT1uBy5l7OqKfQHylGD1RVFqGu','sokef','+1 (123) 515-9282','Et repudiandae id ut','customer',0,'2026-05-11 12:20:04.72','2026-05-11 12:20:04.72',NULL) RETURNING "id"
+[31mERRO[0m[0136] ERROR: value too long for type character varying(15) (SQLSTATE 22001)  [31mat[0m="2026-05-11 12:20:04" [31mip[0m="[::1]:50378" [31mmethod[0m=POST [31muri[0m=/api/users/register
+[36mINFO[0m[0197] incoming request                              [36mat[0m="2026-05-11 12:21:06" [36mip[0m="[::1]:50378" [36mmethod[0m=OPTIONS [36muri[0m=/api/users/register
+[36mINFO[0m[0197] incoming request                              [36mat[0m="2026-05-11 12:21:06" [36mip[0m="[::1]:50378" [36mmethod[0m=POST [36muri[0m=/api/users/register
+
+2026/05/11 12:21:06 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:28 [35;1mrecord not found
+[0m[33m[35.798ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE email = 'vutyla@mailinator.com' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:21:06 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:34 [35;1mrecord not found
+[0m[33m[0.978ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE username = 'sokef' AND "users"."deleted_at" IS NULL ORDER BY "users"."id" LIMIT 1
+
+2026/05/11 12:21:06 [31;1m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/api/repository/user_repository.go:39 [35;1mERROR: value too long for type character varying(15) (SQLSTATE 22001)
+[0m[33m[24.819ms] [34;1m[rows:0][0m INSERT INTO "users" ("full_name","email","password","username","phone","address","role","deposit","created_at","updated_at","deleted_at") VALUES ('Joel Oliver','vutyla@mailinator.com','$2a$10$nVrP219Ly4vZLBVMZJigV.bkXCPA49OkRQQykw64xU0co2HtfWk1e','sokef','+1 (123) 515-9282','Et repudiandae id ut','customer',0,'2026-05-11 12:21:06.14','2026-05-11 12:21:06.14',NULL) RETURNING "id"
+[31mERRO[0m[0197] ERROR: value too long for type character varying(15) (SQLSTATE 22001)  [31mat[0m="2026-05-11 12:21:06" [31mip[0m="[::1]:50378" [31mmethod[0m=POST [31muri[0m=/api/users/register

@@ -1,0 +1,859 @@
+> nx run platform:dev
+
+> pnpm run dev
+
+
+> platform@ dev /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform
+> vite dev --port 3000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J
+  [32m[1mVITE[22m v8.0.11[39m  [2mready in [0m[1m625[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m3000[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:31:58 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/index.tsx?tsr-split=component[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/routes/index.tsx?tsr-split=component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:32:34 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/routes/__root.tsx, /src/styles.css[22m
+[2m12:32:34 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/routes/__root.tsx[22m Could not Fast Refresh (export removed)
+[2m12:32:34 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/routes/__root.tsx[22m
+[36m[Client][39m [vite] invalidate /src/routes/__root.tsx: Could not Fast Refresh (export removed)
+[36m[Client][39m [vite] hot updated: /src/routes/__root.tsx
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:32:43 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/main.tsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:32:52 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/main.tsx, /src/styles.css[22m
+[2m12:32:53 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/main.tsx[22m Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m12:32:53 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/main.tsx[22m
+[36m[Client][39m [vite] invalidate /src/main.tsx: Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[36m[Client][39m [vite] hot updated: /src/main.tsx
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:32:54 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/main.tsx, /src/styles.css[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+Error: Conflicting configuration paths were found for the following routes: "/", "/".
+Please ensure each Route has a unique full path.
+Conflicting files: 
+ /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/routes/_authenticated.tsx
+ /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/routes/index.tsx
+
+    at file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-generator@1.166.42/node_modules/[4m@tanstack/router-generator[24m/dist/esm/generator.js:127:13
+    at async generate (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-plugin@1.167.35_@tanstack+react-router@1.169.2_react-dom@19.2.6_react@_7d78227ae585e675fe1355e650e50886/node_modules/[4m@tanstack/router-plugin[24m/dist/esm/core/router-generator-plugin.js:39:4)
+    at async PluginContext.watchChange (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-plugin@1.167.35_@tanstack+react-router@1.169.2_react-dom@19.2.6_react@_7d78227ae585e675fe1355e650e50886/node_modules/[4m@tanstack/router-plugin[24m/dist/esm/core/router-generator-plugin.js:49:4)
+    at async Promise.all (index 1)
+    at async EnvironmentPluginContainer.hookParallel (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:30038:3)
+    at async EnvironmentPluginContainer.watchChange (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:30205:3)
+    at async Promise.all (index 0)
+    at async onFileAddUnlink (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:26224:3)
+Error: Conflicting configuration paths were found for the following routes: "/", "/".
+Please ensure each Route has a unique full path.
+Conflicting files: 
+ /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/routes/_authenticated.tsx
+ /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/routes/index.tsx
+
+    at file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-generator@1.166.42/node_modules/[4m@tanstack/router-generator[24m/dist/esm/generator.js:127:13
+    at async generate (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-plugin@1.167.35_@tanstack+react-router@1.169.2_react-dom@19.2.6_react@_7d78227ae585e675fe1355e650e50886/node_modules/[4m@tanstack/router-plugin[24m/dist/esm/core/router-generator-plugin.js:39:4)
+    at async PluginContext.watchChange (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-plugin@1.167.35_@tanstack+react-router@1.169.2_react-dom@19.2.6_react@_7d78227ae585e675fe1355e650e50886/node_modules/[4m@tanstack/router-plugin[24m/dist/esm/core/router-generator-plugin.js:49:4)
+    at async Promise.all (index 1)
+    at async EnvironmentPluginContainer.hookParallel (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:30038:3)
+    at async EnvironmentPluginContainer.watchChange (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:30205:3)
+    at async Promise.all (index 0)
+    at async onFileAddUnlink (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:26224:3)
+Error: Conflicting configuration paths were found for the following routes: "/", "/".
+Please ensure each Route has a unique full path.
+Conflicting files: 
+ /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/routes/index.tsx
+ /Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/routes/_authenticated/index.tsx
+
+    at file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-generator@1.166.42/node_modules/[4m@tanstack/router-generator[24m/dist/esm/generator.js:127:13
+    at async generate (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-plugin@1.167.35_@tanstack+react-router@1.169.2_react-dom@19.2.6_react@_7d78227ae585e675fe1355e650e50886/node_modules/[4m@tanstack/router-plugin[24m/dist/esm/core/router-generator-plugin.js:39:4)
+    at async PluginContext.watchChange (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/@tanstack+router-plugin@1.167.35_@tanstack+react-router@1.169.2_react-dom@19.2.6_react@_7d78227ae585e675fe1355e650e50886/node_modules/[4m@tanstack/router-plugin[24m/dist/esm/core/router-generator-plugin.js:49:4)
+    at async Promise.all (index 1)
+    at async EnvironmentPluginContainer.hookParallel (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:30038:3)
+    at async EnvironmentPluginContainer.watchChange (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:30205:3)
+    at async Promise.all (index 0)
+    at async onFileAddUnlink (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/[4m.pnpm[24m/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/[4mvite[24m/dist/node/chunks/node.js:26224:3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:33:35 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/routes/index.tsx, /src/routes/index.tsx?tsr-split=component, /src/styles.css[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:33:36 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/main.tsx, /src/styles.css[22m
+[36m[Client][39m [vite] Failed to reload /src/routes/index.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[36m[Client][39m [vite] hot updated: /src/routes/index.tsx
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:33:53 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/features/auth/AuthContext.tsx[22m
+[2m12:33:54 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/features/auth/AuthContext.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m12:33:54 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/routes/__root.tsx, /src/main.tsx[22m
+[2m12:33:54 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/routes/__root.tsx[22m Could not Fast Refresh ("Route" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m12:33:54 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/main.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] invalidate /src/features/auth/AuthContext.tsx: Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[36m[Client][39m [vite] hot updated: /src/features/auth/AuthContext.tsx
+[36m[Client][39m [vite] invalidate /src/routes/__root.tsx: Could not Fast Refresh ("Route" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[36m[Client][39m [vite] hot updated: /src/routes/__root.tsx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:34:05 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/_authenticated.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:34:07 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/login.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:34:44 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/features/auth/AuthContext.tsx[22m
+[36m[Client][39m [vite] {}
+[36m[Client][39m [vite] Failed to reload /src/features/auth/AuthContext.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/features/auth/AuthContext.tsx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:34:45 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/main.tsx, /src/styles.css[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:34:54 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/features/auth/AuthContext.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/features/auth/AuthContext.tsx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:44:18 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/login.tsx, /src/routes/login.tsx?tsr-split=component[22m
+[2m12:44:18 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to resolve import "../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:44:18 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to resolve import "../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m [33m(x2)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:44:18 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to resolve import "../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m [33m(x3)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:44:18 PM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m
+      at TransformPluginContext._formatLog (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30390:39)
+      at TransformPluginContext.error (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30387:14)
+      at normalizeUrl (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27651:18)
+      at async file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27714:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27682:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30179:14)
+      at async loadAndTransform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:24509:26)
+[2m12:44:19 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to resolve import "../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:44:19 PM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m
+      at TransformPluginContext._formatLog (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30390:39)
+      at TransformPluginContext.error (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30387:14)
+      at normalizeUrl (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27651:18)
+      at async file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27714:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27682:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30179:14)
+      at async loadAndTransform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:24509:26)
+[36m[Client][39m [vite] Failed to reload /src/routes/login.tsx?tsr-split=component. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/routes/login.tsx
+[36m[Client][39m [vite] hot updated: /src/routes/login.tsx?tsr-split=component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:44:29 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/_authenticated/index.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/routes/_authenticated/index.tsx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:44:48 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/components/atoms/Label.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:45:34 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/components/atoms/Button.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:45:36 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/components/atoms/Input.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:45:37 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/components/molecules/FormField.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:46:11 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/login.tsx?tsr-split=component[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:46:11 PM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m
+      at TransformPluginContext._formatLog (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30390:39)
+      at TransformPluginContext.error (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30387:14)
+      at normalizeUrl (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27651:18)
+      at async file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27714:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27682:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30179:14)
+      at async loadAndTransform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:24509:26)
+[2m12:46:11 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to resolve import "../../../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:46:11 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to resolve import "../../../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m [33m(x2)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:46:11 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to resolve import "../../../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m [33m(x3)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:46:11 PM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../../../api/endpoints/users/users" from "src/features/auth/components/LoginForm.tsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36m/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/components/LoginForm.tsx[39m:4:34
+[33m  2  |  import { FormField } from "../../../components/molecules/FormField";
+  3  |  import { Button } from "../../../components/atoms/Button";
+  4  |  import { usePostUsersLogin } from "../../../../api/endpoints/users/users";
+     |                                     ^
+  5  |  import { useAuth } from "../AuthContext";
+  6  |  var _jsxFileName = "/Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/apps/platform/src/features/auth/co...[39m
+      at TransformPluginContext._formatLog (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30390:39)
+      at TransformPluginContext.error (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30387:14)
+      at normalizeUrl (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27651:18)
+      at async file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27714:30
+      at async Promise.all (index 3)
+      at async TransformPluginContext.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:27682:4)
+      at async EnvironmentPluginContainer.transform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:30179:14)
+      at async loadAndTransform (file:///Users/anasmufti/Projects/Web/anaslab/monorepo_gots_starterkit/node_modules/.pnpm/vite@8.0.11_@types+node@22.19.18_esbuild@0.27.7_jiti@2.7.0_yaml@2.8.4/node_modules/vite/dist/node/chunks/node.js:24509:26)
+[36m[Client][39m [vite] Failed to reload /src/routes/login.tsx?tsr-split=component. This could be due to syntax errors or importing non-existent modules. (see errors above)
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/routes/login.tsx?tsr-split=component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:46:47 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/login.tsx?tsr-split=component[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/routes/login.tsx?tsr-split=component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:48:31 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/features/auth/components/LoginForm.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/features/auth/components/LoginForm.tsx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:48:40 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/features/auth/components/LoginForm.tsx[22m [33m(x2)[39m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/features/auth/components/LoginForm.tsx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:48:48 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/features/auth/components/LoginForm.tsx[22m [33m(x3)[39m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/features/auth/components/LoginForm.tsx
+[36m[Client][39m Warning: A notFoundError was encountered on the route with ID "__root__", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)
+[36m[Client][39m [vite] connected.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:51:15 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/main.tsx, /src/styles.css[22m
+[2m12:51:16 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/main.tsx[22m Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m12:51:16 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/main.tsx[22m
+[36m[Client][39m [vite] invalidate /src/main.tsx: Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[36m[Client][39m [vite] hot updated: /src/main.tsx
+[36m[Client][39m [vite] hot updated: /src/styles.css
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:51:28 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/routes/login.tsx, /src/routes/login.tsx?tsr-split=component[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/routes/login.tsx
+[36m[Client][39m [vite] hot updated: /src/routes/login.tsx?tsr-split=component
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m12:54:20 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css, /src/components/molecules/FormField.tsx[22m
+[36m[Client][39m [vite] hot updated: /src/styles.css
+[36m[Client][39m [vite] hot updated: /src/components/molecules/FormField.tsx
+[36m[Client][39m [vite] connected.

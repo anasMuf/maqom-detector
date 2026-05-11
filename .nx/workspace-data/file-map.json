@@ -1,0 +1,263 @@
+{
+  "version": "6.0",
+  "nxVersion": "22.7.1",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".gitignore",
+        "hash": "11470832608849661353"
+      },
+      {
+        "file": "nx.json",
+        "hash": "1892041227872941024"
+      },
+      {
+        "file": "package.json",
+        "hash": "12993729004191950675"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "13890754065900877894"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "13108396804214547201"
+      }
+    ],
+    "projectFileMap": {
+      "api": [
+        {
+          "file": "apps/api/.air.toml",
+          "hash": "5162627561640661739"
+        },
+        {
+          "file": "apps/api/config/database.go",
+          "hash": "12002467768362410512"
+        },
+        {
+          "file": "apps/api/docs/docs.go",
+          "hash": "18251490472987863942"
+        },
+        {
+          "file": "apps/api/docs/swagger.json",
+          "hash": "17660869707164757355"
+        },
+        {
+          "file": "apps/api/docs/swagger.yaml",
+          "hash": "15740975181737287284"
+        },
+        {
+          "file": "apps/api/dto/error_response.go",
+          "hash": "15325644917403929094"
+        },
+        {
+          "file": "apps/api/dto/success_response.go",
+          "hash": "10368436562831872158"
+        },
+        {
+          "file": "apps/api/dto/user.go",
+          "hash": "11324666635053162063"
+        },
+        {
+          "file": "apps/api/go.mod",
+          "hash": "3541958960011508467"
+        },
+        {
+          "file": "apps/api/go.sum",
+          "hash": "12933053851480517907"
+        },
+        {
+          "file": "apps/api/handler/error_handler.go",
+          "hash": "479046871442709831"
+        },
+        {
+          "file": "apps/api/handler/user_handler.go",
+          "hash": "3627826642028235807"
+        },
+        {
+          "file": "apps/api/main.go",
+          "hash": "15587874464896907997"
+        },
+        {
+          "file": "apps/api/middleware/auth.go",
+          "hash": "8166646580476369033"
+        },
+        {
+          "file": "apps/api/middleware/logrus_logger.go",
+          "hash": "15159341053068126878"
+        },
+        {
+          "file": "apps/api/model/model.go",
+          "hash": "3665824486229942051"
+        },
+        {
+          "file": "apps/api/model/user.go",
+          "hash": "3039503267480481261"
+        },
+        {
+          "file": "apps/api/package.json",
+          "hash": "1380726307627241023"
+        },
+        {
+          "file": "apps/api/repository/user_repository.go",
+          "hash": "14444577798085693701"
+        },
+        {
+          "file": "apps/api/service/user_service.go",
+          "hash": "3315118511436744684"
+        },
+        {
+          "file": "apps/api/utility/validator.go",
+          "hash": "7364420608162507987"
+        }
+      ],
+      "platform": [
+        {
+          "file": "apps/platform/.cta.json",
+          "hash": "15893600505412175053"
+        },
+        {
+          "file": "apps/platform/.vscode/settings.json",
+          "hash": "5824435276122037701"
+        },
+        {
+          "file": "apps/platform/README.md",
+          "hash": "14584841227637206919"
+        },
+        {
+          "file": "apps/platform/biome.json",
+          "hash": "10727583318661364237"
+        },
+        {
+          "file": "apps/platform/index.html",
+          "hash": "13172297868853286487"
+        },
+        {
+          "file": "apps/platform/orval.config.ts",
+          "hash": "151524923301107883"
+        },
+        {
+          "file": "apps/platform/package.json",
+          "hash": "16685968536983920722",
+          "deps": [
+            "npm:@biomejs/biome",
+            "npm:@tailwindcss/typography",
+            "npm:@tanstack/devtools-vite",
+            "npm:@tanstack/router-plugin",
+            "npm:@testing-library/dom",
+            "npm:@testing-library/react",
+            "npm:@types/node",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:@vitejs/plugin-react",
+            "npm:jsdom",
+            "npm:orval",
+            "npm:typescript",
+            "npm:vite",
+            "npm:vitest",
+            "npm:@tailwindcss/vite",
+            "npm:@tanstack/react-devtools",
+            "npm:@tanstack/react-query",
+            "npm:@tanstack/react-router",
+            "npm:@tanstack/react-router-devtools",
+            "npm:lucide-react",
+            "npm:react",
+            "npm:react-dom",
+            "npm:tailwindcss"
+          ]
+        },
+        {
+          "file": "apps/platform/pnpm-lock.yaml",
+          "hash": "12277564429467429142"
+        },
+        {
+          "file": "apps/platform/public/favicon.ico",
+          "hash": "2949791817221603359"
+        },
+        {
+          "file": "apps/platform/public/logo192.png",
+          "hash": "7585273181698778288"
+        },
+        {
+          "file": "apps/platform/public/logo512.png",
+          "hash": "9339365414554387981"
+        },
+        {
+          "file": "apps/platform/public/manifest.json",
+          "hash": "425001267799769451"
+        },
+        {
+          "file": "apps/platform/public/robots.txt",
+          "hash": "2790380794362165217"
+        },
+        {
+          "file": "apps/platform/src/api/endpoints/users/users.ts",
+          "hash": "8838246990145087905"
+        },
+        {
+          "file": "apps/platform/src/api/model/dtoCreateUserRequest.ts",
+          "hash": "1743857100233305321"
+        },
+        {
+          "file": "apps/platform/src/api/model/dtoErrorResponse.ts",
+          "hash": "10619453255811078958"
+        },
+        {
+          "file": "apps/platform/src/api/model/dtoLoginUserRequest.ts",
+          "hash": "13956734548538613300"
+        },
+        {
+          "file": "apps/platform/src/api/model/dtoLoginUserResponse.ts",
+          "hash": "8005903491497015930"
+        },
+        {
+          "file": "apps/platform/src/api/model/dtoSuccessResponse.ts",
+          "hash": "9389809970804967572"
+        },
+        {
+          "file": "apps/platform/src/api/model/index.ts",
+          "hash": "12225426329854369463"
+        },
+        {
+          "file": "apps/platform/src/api/mutator/custom-instance.ts",
+          "hash": "3850985083098712643"
+        },
+        {
+          "file": "apps/platform/src/main.tsx",
+          "hash": "16778375438473025443"
+        },
+        {
+          "file": "apps/platform/src/routeTree.gen.ts",
+          "hash": "17988140970877072316"
+        },
+        {
+          "file": "apps/platform/src/router.tsx",
+          "hash": "9501868841828017541"
+        },
+        {
+          "file": "apps/platform/src/routes/__root.tsx",
+          "hash": "3700467653510840270"
+        },
+        {
+          "file": "apps/platform/src/routes/index.tsx",
+          "hash": "13624558691177555603"
+        },
+        {
+          "file": "apps/platform/src/styles.css",
+          "hash": "8541154702958076804"
+        },
+        {
+          "file": "apps/platform/tsconfig.json",
+          "hash": "7106753113026053115"
+        },
+        {
+          "file": "apps/platform/vite.config.ts",
+          "hash": "4126451534379707828"
+        }
+      ]
+    }
+  },
+  "externalNodesHash": "15777931413849701468"
+}
