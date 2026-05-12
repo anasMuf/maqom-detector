@@ -52,6 +52,7 @@ async def analyze_audio(
     """
     start_time = time.time()
     temp_file_path = None
+    metadata = None
 
     try:
         # ── Step 1: Dapatkan file audio ──
@@ -64,6 +65,12 @@ async def analyze_audio(
             try:
                 result = download_audio(url)
                 temp_file_path = result.file_path
+                # Store metadata
+                metadata = {
+                    "title": result.title,
+                    "duration": result.duration_seconds,
+                    "channel": result.channel
+                }
             except YouTubeFetchError as e:
                 raise HTTPException(status_code=422, detail={
                     "code": e.code,
@@ -146,6 +153,7 @@ async def analyze_audio(
             "audio_quality": audio_quality,
             "processing_ms": processing_ms,
             "pcp": pcp.tolist(),
+            "metadata": metadata if source_type == "youtube" else None,
         }
 
     except HTTPException:

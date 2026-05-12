@@ -3,6 +3,7 @@ package service
 import (
 	"api/model"
 	"api/repository"
+	"api/utility"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -47,6 +49,11 @@ type AnalyzerResponse struct {
 	AudioQuality    string    `json:"audio_quality"`
 	ProcessingMs    int       `json:"processing_ms"`
 	PCP             []float64 `json:"pcp"`
+	Metadata        *struct {
+		Title    string `json:"title"`
+		Duration int    `json:"duration"`
+		Channel  string `json:"channel"`
+	} `json:"metadata"`
 }
 
 // StartYoutubeAnalysis creates a new analysis and starts async processing
@@ -79,10 +86,31 @@ func (s *AnalyzeService) StartUploadAnalysis(sessionID uuid.UUID, filename strin
 		return nil, fmt.Errorf("gagal buat session: %w", err)
 	}
 
+	// Save file to Cloudinary if available, otherwise local
+	fileID := uuid.New().String()
+	
+	// Get extension from filename
+	ext := ".wav"
+	if idx := strings.LastIndex(filename, "."); idx != -1 {
+		ext = filename[idx:]
+	}
+	
+	saveFilename := fileID + ext
+	inputSource := saveFilename
+
+	cldURL, err := utility.UploadToCloudinary(fileContent, fileID)
+	if err == nil && cldURL != "" {
+		inputSource = cldURL
+	} else {
+		// Fallback to local
+		uploadPath := "apps/api/uploads/" + saveFilename
+		os.WriteFile(uploadPath, fileContent, 0644)
+	}
+
 	analysis := &model.Analysis{
 		SessionID:   sessionID,
 		InputType:   sourceType,
-		InputSource: filename,
+		InputSource: inputSource,
 		Status:      "pending",
 	}
 
@@ -212,6 +240,12 @@ func (s *AnalyzeService) callAnalyzerAndFinalize(analysisID uuid.UUID, analyzerU
 		})
 	}
 
+	var metadataJSON string
+	if analyzerResp.Metadata != nil {
+		mj, _ := json.Marshal(analyzerResp.Metadata)
+		metadataJSON = string(mj)
+	}
+
 	result := &repository.AnalysisResult{
 		DetectedMaqamID: topMaqam.MaqamID,
 		ConfidenceScore: topMaqam.ConfidenceScore,
@@ -219,6 +253,7 @@ func (s *AnalyzeService) callAnalyzerAndFinalize(analysisID uuid.UUID, analyzerU
 		ExplanationText: explanation,
 		AudioQuality:    analyzerResp.AudioQuality,
 		ProcessingMs:    analyzerResp.ProcessingMs,
+		Metadata:        metadataJSON,
 		Candidates:      candidates,
 	}
 

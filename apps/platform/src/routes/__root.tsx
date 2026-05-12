@@ -18,7 +18,7 @@ function RootComponent() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-white shadow-sm">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-primary text-white">
@@ -37,12 +37,12 @@ function RootComponent() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto flex-1 p-4 md:p-8">
+      <main className="container mx-auto flex-1 p-4 md:p-8 pb-24 md:pb-8">
         <Outlet />
       </main>
 
       {/* Mobile Bottom Nav */}
-      <div className="fixed bottom-0 left-0 z-50 w-full border-t border-border bg-background md:hidden pb-safe">
+      <div className="fixed bottom-0 left-0 z-50 w-full border-t border-border bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)] md:hidden pb-safe">
         <div className="flex h-16 items-center justify-around px-2">
           <Link to="/" className="flex flex-col items-center gap-1 text-muted-foreground [&.active]:text-brand-primary">
             <Home size={20} />

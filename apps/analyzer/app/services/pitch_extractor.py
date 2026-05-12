@@ -3,6 +3,8 @@
 import numpy as np
 import librosa
 import crepe
+import os
+from pydub import AudioSegment
 
 # Konfigurasi default
 DEFAULT_SR = 22050  # Sample rate standar librosa
@@ -18,30 +20,45 @@ def load_audio(
 ) -> np.ndarray:
     """
     Load audio file dan crop ke segmen yang diminta.
-
-    Args:
-        file_path: Path ke file audio (WAV, MP3, dll.)
-        segment_start: Detik mulai analisis
-        segment_duration: Durasi segmen dalam detik
-
-    Returns:
-        Audio signal sebagai numpy array (mono, sr=22050)
+    Mendukung auto-conversion dari MP3/M4A ke WAV via pydub.
     """
-    # Load audio mono
-    y, sr = librosa.load(
-        file_path,
-        sr=DEFAULT_SR,
-        mono=True,
-        offset=segment_start,
-        duration=segment_duration,
-    )
+    ext = os.path.splitext(file_path)[1].lower()
+    temp_wav = None
+    target_path = file_path
 
-    if len(y) < DEFAULT_SR * 3:
-        raise ValueError(
-            "Audio terlalu pendek setelah cropping. Minimal 3 detik diperlukan."
+    # Jika bukan WAV, konversi ke WAV temp menggunakan pydub
+    if ext != ".wav" and ext != "":
+        try:
+            audio_segment = AudioSegment.from_file(file_path)
+            temp_wav = file_path + ".temp.wav"
+            audio_segment.export(temp_wav, format="wav")
+            target_path = temp_wav
+        except Exception as e:
+            print(f"Warning: Gagal konversi {ext} ke WAV via pydub: {e}")
+
+    try:
+        # Load audio mono
+        y, sr = librosa.load(
+            target_path,
+            sr=DEFAULT_SR,
+            mono=True,
+            offset=segment_start,
+            duration=segment_duration,
         )
 
-    return y
+        if len(y) < DEFAULT_SR * 3:
+            raise ValueError(
+                "Audio terlalu pendek setelah cropping. Minimal 3 detik diperlukan."
+            )
+
+        return y
+    finally:
+        # Cleanup temp file jika ada
+        if temp_wav and os.path.exists(temp_wav):
+            try:
+                os.remove(temp_wav)
+            except:
+                pass
 
 
 def extract_pitch(audio: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:

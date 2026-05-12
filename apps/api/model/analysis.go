@@ -23,6 +23,7 @@ type Analysis struct {
 	ProcessingMs    *int       `json:"processing_ms"`
 	ErrorCode       string     `json:"error_code,omitempty" gorm:"type:varchar(50)"`
 	ErrorMessage    string     `json:"error_message,omitempty" gorm:"type:text"`
+	Metadata        string     `json:"metadata,omitempty" gorm:"type:text"` // JSON string for extra data
 	CreatedAt       time.Time  `json:"created_at" gorm:"autoCreateTime"`
 	CompletedAt     *time.Time `json:"completed_at,omitempty"`
 

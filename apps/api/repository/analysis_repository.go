@@ -52,6 +52,7 @@ type AnalysisResult struct {
 	ExplanationText string
 	AudioQuality    string
 	ProcessingMs    int
+	Metadata        string
 	Candidates      []model.AnalysisCandidate
 }
 
@@ -66,6 +67,7 @@ func (r *AnalysisRepository) UpdateCompleted(id uuid.UUID, result *AnalysisResul
 			"explanation_text":  result.ExplanationText,
 			"audio_quality":     result.AudioQuality,
 			"processing_ms":     result.ProcessingMs,
+			"metadata":          result.Metadata,
 			"status":            "completed",
 			"completed_at":      now,
 		}).Error; err != nil {

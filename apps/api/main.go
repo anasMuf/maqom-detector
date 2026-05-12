@@ -121,6 +121,9 @@ func main() {
 	// ── Swagger ─────────────────────────────────
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
+	// ── Static Files (Uploaded Audio) ────────────
+	e.Static("/uploads", "apps/api/uploads")
+
 	// ── Start ───────────────────────────────────
 	port := os.Getenv("PORT")
 	if port == "" {

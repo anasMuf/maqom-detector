@@ -21,6 +21,7 @@ export interface DtoAnalysisDetailResponse {
   id?: string;
   input_source?: string;
   input_type?: string;
+  metadata?: any;
   processing_ms?: number;
   status?: string;
 }
