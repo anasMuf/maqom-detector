@@ -34,9 +34,10 @@ func DBInit() *gorm.DB {
 	name := os.Getenv("DB_NAME")
 	sslmode := os.Getenv("SSL_MODE")
 
+	// Gunakan URL object untuk menghandle karakter spesial di password
 	dsn := fmt.Sprintf(
-		"postgres://%s:%s@%s:%s/%s?sslmode=%s",
-		user, password, host, port, name, sslmode,
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
+		host, user, password, name, port, sslmode,
 	)
 
 	log.Printf("Connecting to DB at %s:%s as user %s", host, port, user)
