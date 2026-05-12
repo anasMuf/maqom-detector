@@ -136,7 +136,7 @@ func (s *AnalyzeService) processUploadAnalysis(analysisID uuid.UUID, fileContent
 	}
 	writer.WriteField("mode", mode)
 	writer.WriteField("segment_start", "0")
-	writer.WriteField("segment_duration", "60")
+	writer.WriteField("segment_duration", "120")
 
 	// Add file part
 	part, _ := writer.CreateFormFile("file", "audio.wav")

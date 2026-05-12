@@ -80,7 +80,7 @@ function AnalyzePage() {
 
   const handleYoutubeSubmit = () => {
     if (!youtubeUrl) return;
-    youtubeMutation.mutate({ data: { url: youtubeUrl, segment_start: 0, segment_duration: 60 } }, {
+    youtubeMutation.mutate({ data: { url: youtubeUrl, segment_start: 0, segment_duration: 120 } }, {
       onSuccess: (res) => {
         const id = extractAnalysisId(res);
         if (id) setPollingId(id);
@@ -171,7 +171,7 @@ function AnalyzePage() {
                 onChange={(e) => setYoutubeUrl(e.target.value)}
                 disabled={isProcessing}
               />
-              <p className="text-xs text-muted-foreground mt-2">Sistem akan mengambil 60 detik pertama dari video.</p>
+              <p className="text-xs text-muted-foreground mt-2">Sistem akan mengambil 120 detik pertama dari video.</p>
             </div>
             <Button onClick={handleYoutubeSubmit} disabled={!youtubeUrl || isProcessing} isLoading={youtubeMutation.isPending} className="w-full">
               Analisis YouTube
