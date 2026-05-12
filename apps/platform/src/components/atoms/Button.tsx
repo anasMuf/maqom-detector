@@ -1,42 +1,60 @@
-import { type ButtonHTMLAttributes, forwardRef } from 'react';
+import * as React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
+import { Spinner } from './Spinner';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-}
-
-const variantStyles = {
-  primary: 'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600',
-  secondary: 'bg-white text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50',
-  danger: 'bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600',
-  ghost: 'text-gray-700 hover:bg-gray-100',
-};
-
-const sizeStyles = {
-  sm: 'px-2.5 py-1.5 text-xs',
-  md: 'px-3 py-2 text-sm',
-  lg: 'px-4 py-2.5 text-sm',
-};
-
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = '', variant = 'primary', size = 'md', disabled, ...props }, ref) => {
-    return (
-      <button
-        ref={ref}
-        disabled={disabled}
-        className={`
-          inline-flex items-center justify-center rounded-md font-semibold
-          shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2
-          transition-colors duration-150 cursor-pointer
-          disabled:opacity-50 disabled:cursor-not-allowed
-          ${variantStyles[variant]}
-          ${sizeStyles[size]}
-          ${className}
-        `}
-        {...props}
-      />
-    );
+const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        filled: 'bg-brand-primary text-white hover:bg-brand-primary-hover',
+        outline:
+          'border-2 border-brand-primary text-brand-primary hover:bg-brand-primary-subtle',
+        ghost: 'text-brand-primary hover:bg-brand-primary-subtle',
+        text: 'text-brand-primary underline-offset-4 hover:underline hover:bg-transparent',
+      },
+      size: {
+        sm: 'h-9 px-3',
+        md: 'h-10 px-4 py-2',
+        lg: 'h-12 px-8 text-base rounded-2xl',
+        icon: 'h-10 w-10',
+      },
+    },
+    defaultVariants: {
+      variant: 'filled',
+      size: 'md',
+    },
   }
 );
 
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  isLoading?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, isLoading, children, disabled, ...props }, ref) => {
+    return (
+      <button
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        disabled={disabled || isLoading}
+        {...props}
+      >
+        {isLoading && (
+          <Spinner
+            className="mr-2"
+            size="sm"
+            color={variant === 'filled' ? 'white' : 'brand'}
+          />
+        )}
+        {children}
+      </button>
+    );
+  }
+);
 Button.displayName = 'Button';
+
+export { Button, buttonVariants };

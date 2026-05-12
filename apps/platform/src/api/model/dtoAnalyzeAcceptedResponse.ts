@@ -6,8 +6,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface DtoSuccessResponse {
-  data?: unknown;
-  message?: string;
-  status?: number;
+export interface DtoAnalyzeAcceptedResponse {
+  analysis_id?: string;
+  estimated_seconds?: number;
+  polling_url?: string;
+  status?: string;
 }

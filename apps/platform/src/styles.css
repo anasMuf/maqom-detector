@@ -3,6 +3,22 @@
 
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'Amiri', serif;
+
+  --color-brand-primary: #0F6E56;
+  --color-brand-primary-hover: #085041;
+  --color-brand-primary-subtle: #E1F5EE;
+  --color-brand-secondary: #534AB7;
+  --color-brand-secondary-subtle: #EEEDFE;
+
+  --color-confidence-very-high: #3B6D11;
+  --color-confidence-high: #639922;
+  --color-confidence-medium: #854F0B;
+  --color-confidence-low: #993C1D;
+  --color-confidence-very-low: #A32D2D;
+
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
 }
 
 * {

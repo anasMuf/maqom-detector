@@ -6,8 +6,10 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface DtoSuccessResponse {
-  data?: unknown;
-  message?: string;
-  status?: number;
+export interface DtoCandidateResponse {
+  confidence_score?: number;
+  maqam_id?: string;
+  name_arabic?: string;
+  name_latin?: string;
+  rank?: number;
 }

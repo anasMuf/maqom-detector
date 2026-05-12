@@ -6,8 +6,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface DtoSuccessResponse {
-  data?: unknown;
-  message?: string;
-  status?: number;
+export interface DtoPaginationMeta {
+  limit?: number;
+  page?: number;
+  total_items?: number;
+  total_pages?: number;
 }

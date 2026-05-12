@@ -6,8 +6,11 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface DtoSuccessResponse {
-  data?: unknown;
-  message?: string;
-  status?: number;
+export interface DtoMaqamListResponse {
+  emotion_tags?: string[];
+  id?: string;
+  interval_description?: string;
+  name_arabic?: string;
+  name_indonesia?: string;
+  name_latin?: string;
 }

@@ -6,8 +6,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface DtoSuccessResponse {
-  data?: unknown;
-  message?: string;
-  status?: number;
-}
+export type PostAnalyzeRecordBody = {
+  /** Audio recording */
+  file: Blob;
+  /** Mode: microphone atau humming */
+  mode?: string;
+};

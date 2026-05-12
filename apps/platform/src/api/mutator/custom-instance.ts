@@ -29,14 +29,33 @@ export const customInstance = async <T>(
   }
 
   const token = localStorage.getItem('token');
+  
+  // Manage Session ID
+  let sessionId = localStorage.getItem('maqam_session_id');
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem('maqam_session_id', sessionId);
+  }
+
+  // Handle FormData (multipart) automatically
+  const isFormData = options?.body instanceof FormData;
+  const headers = new Headers(options?.headers);
+  
+  if (!isFormData && !headers.has('Content-Type')) {
+    headers.set('Content-Type', 'application/json');
+  }
+  
+  if (token && !headers.has('Authorization')) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+
+  if (sessionId && !headers.has('X-Session-ID')) {
+    headers.set('X-Session-ID', sessionId);
+  }
 
   const response = await fetch(url.toString(), {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options?.headers,
-    },
+    headers,
   });
 
   const data = await response.json().catch(() => null);
@@ -50,9 +69,5 @@ export const customInstance = async <T>(
     });
   }
 
-  return {
-    data,
-    status: response.status,
-    headers: response.headers,
-  } as unknown as T;
+  return data as T;
 };

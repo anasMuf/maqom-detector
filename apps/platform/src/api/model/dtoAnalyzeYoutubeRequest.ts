@@ -6,8 +6,13 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface DtoSuccessResponse {
-  data?: unknown;
-  message?: string;
-  status?: number;
+export interface DtoAnalyzeYoutubeRequest {
+  /**
+     * @minimum 5
+     * @maximum 120
+     */
+  segment_duration?: number;
+  /** @minimum 0 */
+  segment_start?: number;
+  url: string;
 }

@@ -11,9 +11,19 @@ import (
 )
 
 func LoadEnv() {
-	if err := godotenv.Load("../../.env"); err != nil {
-		log.Println("No .env file found at root, pakai environment bawaan OS")
+	// Try multiple paths to find .env depending on working directory
+	paths := []string{
+		".env",          // running from root
+		"../../.env",    // running from apps/api/
+		"apps/api/.env", // app-specific .env from root
 	}
+	for _, p := range paths {
+		if err := godotenv.Load(p); err == nil {
+			log.Printf("Loaded env from: %s", p)
+			return
+		}
+	}
+	log.Println("No .env file found, using OS environment variables")
 }
 
 func DBInit() *gorm.DB {
