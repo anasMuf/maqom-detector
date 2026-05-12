@@ -19,6 +19,7 @@ COPY apps/platform/ apps/platform/
 # Build
 ARG VITE_API_URL
 ENV VITE_API_URL=$VITE_API_URL
+LABEL build_date=2026-05-12T14:30
 
 WORKDIR /app/apps/platform
 RUN VITE_API_URL=$VITE_API_URL pnpm build
