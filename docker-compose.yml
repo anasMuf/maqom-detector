@@ -22,13 +22,14 @@ services:
 
   # ─── Python Analyzer Service ────────────────
   analyzer:
+    image: ghcr.io/${GITHUB_REPOSITORY:-anasmuf/maqom-detector}/analyzer:latest
     build:
       context: ./apps/analyzer
       dockerfile: Dockerfile
     container_name: maqam-analyzer
     restart: unless-stopped
     ports:
-      - "${ANALYZER_PORT:-8000}:8000"
+      - "${ANALYZER_PORT:-8002}:8000"
     environment:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
     volumes:
@@ -41,13 +42,14 @@ services:
 
   # ─── Golang API ─────────────────────────────
   api:
+    image: ghcr.io/${GITHUB_REPOSITORY:-anasmuf/maqom-detector}/api:latest
     build:
       context: ./apps/api
       dockerfile: Dockerfile
     container_name: maqam-api
     restart: unless-stopped
     ports:
-      - "${PORT:-8080}:8080"
+      - "${PORT:-8082}:8080"
     depends_on:
       postgres:
         condition: service_healthy
@@ -66,13 +68,14 @@ services:
 
   # ─── Frontend (Production Build) ────────────
   platform:
+    image: ghcr.io/${GITHUB_REPOSITORY:-anasmuf/maqom-detector}/platform:latest
     build:
       context: .
       dockerfile: ./apps/platform/Dockerfile
     container_name: maqam-platform
     restart: unless-stopped
     ports:
-      - "3000:80"
+      - "3002:80"
     depends_on:
       - api
 

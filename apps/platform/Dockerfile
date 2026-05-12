@@ -13,8 +13,11 @@ RUN corepack enable && pnpm install --frozen-lockfile
 COPY apps/platform/ apps/platform/
 
 # Build
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 WORKDIR /app/apps/platform
-RUN pnpm build
+RUN VITE_API_URL=$VITE_API_URL pnpm build
 
 # ─── Runtime (Nginx) ─────────────────────
 FROM nginx:alpine
