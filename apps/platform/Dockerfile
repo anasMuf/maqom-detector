@@ -2,12 +2,16 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Copy root workspace files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/platform/package.json apps/platform/
+COPY apps/api/package.json apps/api/
 
 # Install dependencies
-RUN corepack enable && pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # Copy platform source
 COPY apps/platform/ apps/platform/
