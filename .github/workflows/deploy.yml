@@ -10,15 +10,18 @@ env:
   IMAGE_NAME: anasmuf/maqom-detector
 
 jobs:
-  build-and-push:
+  # --- JOB 1: Build API ---
+  build-api:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -33,6 +36,28 @@ jobs:
           context: ./apps/api
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/api:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # --- JOB 2: Build Analyzer ---
+  build-analyzer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Analyzer
         uses: docker/build-push-action@v5
@@ -40,6 +65,28 @@ jobs:
           context: ./apps/analyzer
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/analyzer:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # --- JOB 3: Build Platform ---
+  build-platform:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Platform
         uses: docker/build-push-action@v5
@@ -50,9 +97,12 @@ jobs:
           build-args: |
             VITE_API_URL=https://api.maqom.anaslabs.my.id
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/platform:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
+  # --- JOB 4: Deploy to VPS ---
   deploy:
-    needs: build-and-push
+    needs: [build-api, build-analyzer, build-platform]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy via SSH
@@ -63,12 +113,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/maqom-detector
-            # Update the codebase (docker-compose.yml, etc.)
             git pull origin main
-            # Login to GHCR on VPS
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            # Pull new images and Restart
             docker-compose pull
             docker-compose up -d
-            # Cleanup old images
             docker image prune -f
