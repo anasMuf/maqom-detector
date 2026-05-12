@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   # ─── PostgreSQL Database ────────────────────
-  postgres:
+  maqom-db:
     image: postgres:15-alpine
     container_name: maqam-postgres
     restart: unless-stopped
@@ -51,13 +51,13 @@ services:
     ports:
       - "${PORT:-8082}:8080"
     depends_on:
-      postgres:
+      maqom-db:
         condition: service_healthy
       analyzer:
         condition: service_healthy
     environment:
       - PORT=${PORT:-8080}
-      - DB_HOST=postgres
+      - DB_HOST=maqom-db
       - DB_USER=${DB_USER:-postgres}
       - DB_PASSWORD=${DB_PASSWORD:-postgres}
       - DB_NAME=${DB_NAME:-maqam_detector_db}

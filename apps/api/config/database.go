@@ -35,8 +35,8 @@ func DBInit() *gorm.DB {
 	sslmode := os.Getenv("SSL_MODE")
 
 	dsn := fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
-		host, user, password, name, port, sslmode,
+		"postgres://%s:%s@%s:%s/%s?sslmode=%s",
+		user, password, host, port, name, sslmode,
 	)
 
 	log.Printf("Connecting to DB at %s:%s as user %s", host, port, user)
