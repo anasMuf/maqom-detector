@@ -95,7 +95,7 @@ jobs:
           file: ./apps/platform/Dockerfile
           push: true
           build-args: |
-            VITE_API_URL=https://api.maqom.anaslabs.my.id
+            VITE_API_URL=https://api.maqom.anaslabs.my.id/api/v1
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/platform:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
