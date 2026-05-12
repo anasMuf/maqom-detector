@@ -84,7 +84,7 @@ func main() {
 	e.HTTPErrorHandler = handler.CustomHTTPErrorHandler
 
 	// ── Rate Limiter ────────────────────────────
-	rateLimiter := middleware.NewRateLimiter(10, 1*time.Hour)
+	rateLimiter := middleware.NewRateLimiter(100, 1*time.Hour)
 
 	// ── Routes: Legacy (User/Auth — dari starter kit) ──
 	api := e.Group("/api")

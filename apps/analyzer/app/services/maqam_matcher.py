@@ -66,6 +66,9 @@ def match_maqam(
     dan ambil rotasi dengan similarity tertinggi. Ini memungkinkan
     deteksi maqam terlepas dari key/tonic yang digunakan.
 
+    Menggunakan temperature-scaled softmax untuk confidence scoring
+    agar perbedaan antar kandidat lebih tajam dan informatif.
+
     Args:
         input_pcp: Pitch Class Profile 12-bin dari audio input
         mode: "normal", "microphone", atau "humming"
@@ -97,15 +100,20 @@ def match_maqam(
     # Sort descending by similarity
     results.sort(key=lambda x: x[0], reverse=True)
 
-    # Normalisasi confidence scores
-    # Gunakan softmax-like normalization agar top candidates lebih terdiferensiasi
+    # Temperature-scaled softmax normalization
+    # Temperature < 1.0 = lebih tajam (lebih percaya diri)
+    # Temperature > 1.0 = lebih merata (kurang percaya diri)
+    TEMPERATURE = 0.15
     similarities = np.array([r[0] for r in results])
-    total_sim = similarities.sum()
+    
+    # Softmax dengan temperature scaling
+    scaled = (similarities - similarities.max()) / TEMPERATURE
+    exp_scores = np.exp(scaled)
+    softmax_scores = exp_scores / exp_scores.sum()
 
     candidates = []
     for rank, (similarity, transposition, template) in enumerate(results[:top_n], 1):
-        # Confidence = proporsi relatif terhadap total similarity
-        confidence = float(similarity / total_sim) if total_sim > 0 else 0.0
+        confidence = float(softmax_scores[rank - 1])
 
         # Untuk mode humming, diskon confidence (lebih uncertain)
         if mode == "humming":
@@ -127,13 +135,13 @@ def match_maqam(
 
 def get_confidence_label(confidence: float) -> str:
     """Konversi confidence score ke label verbal."""
-    if confidence >= 0.90:
+    if confidence >= 0.70:
         return "sangat_tinggi"
-    elif confidence >= 0.75:
+    elif confidence >= 0.50:
         return "tinggi"
-    elif confidence >= 0.60:
+    elif confidence >= 0.30:
         return "sedang"
-    elif confidence >= 0.40:
+    elif confidence >= 0.15:
         return "rendah"
     else:
         return "sangat_rendah"
