@@ -76,9 +76,10 @@ func main() {
 	e.Validator = &utility.CustomValidator{Validator: validator.New()}
 	e.Use(middleware.MiddlewareLogging)
 	e.Use(echoMiddleware.CORSWithConfig(echoMiddleware.CORSConfig{
-		AllowOrigins: []string{"*"},
+		AllowOrigins: []string{"http://localhost:3000", "http://localhost:3002", "https://maqom.anaslabs.my.id"},
 		AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.DELETE, echo.OPTIONS},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization, "X-Session-ID"},
+		AllowCredentials: true,
 	}))
 
 	e.HTTPErrorHandler = handler.CustomHTTPErrorHandler
