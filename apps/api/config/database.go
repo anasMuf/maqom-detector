@@ -28,15 +28,18 @@ func LoadEnv() {
 
 func DBInit() *gorm.DB {
 	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
 	host := os.Getenv("DB_HOST")
 	port := os.Getenv("DB_PORT")
 	name := os.Getenv("DB_NAME")
 	sslmode := os.Getenv("SSL_MODE")
 
 	dsn := fmt.Sprintf(
-		"host=%s user=%s dbname=%s port=%s sslmode=%s",
-		host, user, name, port, sslmode,
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
+		host, user, password, name, port, sslmode,
 	)
+
+	log.Printf("Connecting to DB at %s:%s as user %s", host, port, user)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
