@@ -22,7 +22,7 @@ services:
 
   # ─── Python Analyzer Service ────────────────
   analyzer:
-    image: ghcr.io/${GITHUB_REPOSITORY:-anasmuf/maqom-detector}/analyzer:latest
+    image: ghcr.io/anasmuf/maqom-detector/analyzer:latest
     build:
       context: ./apps/analyzer
       dockerfile: Dockerfile
@@ -42,7 +42,7 @@ services:
 
   # ─── Golang API ─────────────────────────────
   api:
-    image: ghcr.io/${GITHUB_REPOSITORY:-anasmuf/maqom-detector}/api:latest
+    image: ghcr.io/anasmuf/maqom-detector/api:latest
     build:
       context: ./apps/api
       dockerfile: Dockerfile
@@ -68,7 +68,7 @@ services:
 
   # ─── Frontend (Production Build) ────────────
   platform:
-    image: ghcr.io/${GITHUB_REPOSITORY:-anasmuf/maqom-detector}/platform:latest
+    image: ghcr.io/anasmuf/maqom-detector/platform:latest
     build:
       context: .
       dockerfile: ./apps/platform/Dockerfile
