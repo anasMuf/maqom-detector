@@ -7,7 +7,7 @@ services:
     container_name: maqam-postgres
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "5436:5432"
     environment:
       POSTGRES_DB: ${DB_NAME:-maqam_detector_db}
       POSTGRES_USER: ${DB_USER:-postgres}
