@@ -1,0 +1,14 @@
+{
+  "venvPath": "./apps/analyzer",
+  "venv": ".venv",
+  "pythonVersion": "3.13",
+  "reportMissingImports": true,
+  "include": ["apps/analyzer"],
+  "executionEnvironments": [
+    {
+      "root": "apps/analyzer",
+      "venvPath": "./apps/analyzer",
+      "venv": ".venv"
+    }
+  ]
+}

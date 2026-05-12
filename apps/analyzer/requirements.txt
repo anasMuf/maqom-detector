@@ -1,0 +1,13 @@
+setuptools>=75.0.0
+fastapi==0.115.12
+uvicorn==0.34.3
+crepe==0.0.15
+tensorflow>=2.21.0
+librosa==0.10.2.post1
+numpy>=1.26.4
+yt-dlp==2025.04.30
+python-multipart==0.0.20
+pydub==0.25.1
+httpx==0.28.1
+
+

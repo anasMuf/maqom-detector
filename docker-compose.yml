@@ -1,0 +1,81 @@
+version: "3.9"
+
+services:
+  # ─── PostgreSQL Database ────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: maqam-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME:-maqam_detector_db}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-maqam_detector_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── Python Analyzer Service ────────────────
+  analyzer:
+    build:
+      context: ./apps/analyzer
+      dockerfile: Dockerfile
+    container_name: maqam-analyzer
+    restart: unless-stopped
+    ports:
+      - "${ANALYZER_PORT:-8000}:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - analyzer_tmp:/tmp/analyzer
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  # ─── Golang API ─────────────────────────────
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: maqam-api
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      analyzer:
+        condition: service_healthy
+    environment:
+      - PORT=${PORT:-8080}
+      - DB_HOST=postgres
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_NAME=${DB_NAME:-maqam_detector_db}
+      - DB_PORT=5432
+      - SSL_MODE=disable
+      - ANALYZER_BASE_URL=http://analyzer:8000
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+
+  # ─── Frontend (Production Build) ────────────
+  platform:
+    build:
+      context: .
+      dockerfile: ./apps/platform/Dockerfile
+    container_name: maqam-platform
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+  analyzer_tmp:

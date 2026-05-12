@@ -1,20 +1,118 @@
-basePath: /api
+basePath: /api/v1
 definitions:
+  dto.AnalysisDetailResponse:
+    properties:
+      audio_quality:
+        example: good
+        type: string
+      candidates:
+        items:
+          $ref: '#/definitions/dto.CandidateResponse'
+        type: array
+      completed_at:
+        type: string
+      confidence_label:
+        example: tinggi
+        type: string
+      confidence_score:
+        example: 0.87
+        type: number
+      created_at:
+        type: string
+      detected_maqam_id:
+        example: hijaz
+        type: string
+      error_code:
+        type: string
+      error_message:
+        type: string
+      explanation_text:
+        type: string
+      id:
+        type: string
+      input_source:
+        example: https://www.youtube.com/watch?v=...
+        type: string
+      input_type:
+        example: youtube
+        type: string
+      processing_ms:
+        example: 12500
+        type: integer
+      status:
+        example: completed
+        type: string
+    type: object
+  dto.AnalyzeAcceptedResponse:
+    properties:
+      analysis_id:
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+      estimated_seconds:
+        example: 30
+        type: integer
+      polling_url:
+        example: /api/v1/analyses/550e8400-e29b-41d4-a716-446655440000
+        type: string
+      status:
+        example: pending
+        type: string
+    type: object
+  dto.AnalyzeYoutubeRequest:
+    properties:
+      segment_duration:
+        example: 60
+        maximum: 120
+        minimum: 5
+        type: integer
+      segment_start:
+        example: 0
+        minimum: 0
+        type: integer
+      url:
+        example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+        type: string
+    required:
+    - url
+    type: object
+  dto.CandidateResponse:
+    properties:
+      confidence_score:
+        example: 0.87
+        type: number
+      maqam_id:
+        example: hijaz
+        type: string
+      name_arabic:
+        example: حجاز
+        type: string
+      name_latin:
+        example: Hijaz
+        type: string
+      rank:
+        example: 1
+        type: integer
+    type: object
   dto.CreateUserRequest:
     properties:
       address:
         type: string
       email:
+        maxLength: 100
         type: string
       full_name:
+        maxLength: 100
         minLength: 3
         type: string
       password:
+        maxLength: 100
         minLength: 6
         type: string
       phone:
+        maxLength: 15
         type: string
       username:
+        maxLength: 50
         minLength: 3
         type: string
     required:
@@ -35,6 +133,35 @@ definitions:
       status:
         type: integer
     type: object
+  dto.HistoryItemResponse:
+    properties:
+      confidence_score:
+        type: number
+      created_at:
+        type: string
+      detected_maqam_id:
+        type: string
+      id:
+        type: string
+      input_source:
+        type: string
+      input_type:
+        example: youtube
+        type: string
+      maqam_name_latin:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.HistoryListResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/dto.HistoryItemResponse'
+        type: array
+      meta:
+        $ref: '#/definitions/dto.PaginationMeta'
+    type: object
   dto.LoginUserRequest:
     properties:
       email:
@@ -50,6 +177,66 @@ definitions:
       token:
         type: string
     type: object
+  dto.MaqamDetailResponse:
+    properties:
+      emotion_tags:
+        items:
+          type: string
+        type: array
+      example_songs:
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      interval_description:
+        type: string
+      name_arabic:
+        type: string
+      name_indonesia:
+        type: string
+      name_latin:
+        type: string
+      tips_aransemen:
+        type: string
+    type: object
+  dto.MaqamListResponse:
+    properties:
+      emotion_tags:
+        items:
+          type: string
+        type: array
+      id:
+        example: hijaz
+        type: string
+      interval_description:
+        example: D – E♭ – F♯ – G – A – B♭ – C
+        type: string
+      name_arabic:
+        example: حجاز
+        type: string
+      name_indonesia:
+        example: Hijaz
+        type: string
+      name_latin:
+        example: Hijaz
+        type: string
+    type: object
+  dto.PaginationMeta:
+    properties:
+      limit:
+        example: 10
+        type: integer
+      page:
+        example: 1
+        type: integer
+      total_items:
+        example: 42
+        type: integer
+      total_pages:
+        example: 5
+        type: integer
+    type: object
   dto.SuccessResponse:
     properties:
       data: {}
@@ -61,17 +248,233 @@ definitions:
 host: localhost:8080
 info:
   contact:
-    email: support@swagger.io
-    name: API Support
-    url: http://www.swagger.io/support
-  description: Ini adalah API starter kit menggunakan Echo Go.
+    name: Anas (Cypress Consulting)
+  description: API pendeteksi maqam musik Arab & Timur Tengah untuk komunitas banjari.
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://swagger.io/terms/
-  title: Starter Kit API
-  version: "1.0"
+    name: ISC
+  title: MaqamDetector API
+  version: 1.0.0
 paths:
+  /analyses/{id}:
+    get:
+      parameters:
+      - description: Session UUID
+        in: header
+        name: X-Session-ID
+        required: true
+        type: string
+      - description: Analysis UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.AnalysisDetailResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Ambil status/hasil analisis (polling)
+      tags:
+      - analyze
+  /analyze/record:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: Session UUID
+        in: header
+        name: X-Session-ID
+        required: true
+        type: string
+      - description: Audio recording
+        in: formData
+        name: file
+        required: true
+        type: file
+      - default: microphone
+        description: 'Mode: microphone atau humming'
+        in: formData
+        name: mode
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/dto.AnalyzeAcceptedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Analisis maqam dari rekaman mikrofon/humming
+      tags:
+      - analyze
+  /analyze/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: Session UUID
+        in: header
+        name: X-Session-ID
+        required: true
+        type: string
+      - description: File audio (WAV, MP3, M4A, dll.)
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/dto.AnalyzeAcceptedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "413":
+          description: Request Entity Too Large
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Analisis maqam dari file audio upload
+      tags:
+      - analyze
+  /analyze/youtube:
+    post:
+      consumes:
+      - application/json
+      description: Memulai proses analisis maqam dari video YouTube secara asinkron
+      parameters:
+      - description: Session UUID
+        in: header
+        name: X-Session-ID
+        required: true
+        type: string
+      - description: YouTube analysis request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AnalyzeYoutubeRequest'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/dto.AnalyzeAcceptedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "429":
+          description: Too Many Requests
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Analisis maqam dari YouTube URL
+      tags:
+      - analyze
+  /history:
+    get:
+      parameters:
+      - description: Session UUID
+        in: header
+        name: X-Session-ID
+        required: true
+        type: string
+      - default: 1
+        description: Halaman
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Jumlah per halaman
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.HistoryListResponse'
+      summary: Riwayat analisis
+      tags:
+      - history
+  /history/{id}:
+    delete:
+      parameters:
+      - description: Session UUID
+        in: header
+        name: X-Session-ID
+        required: true
+        type: string
+      - description: Analysis UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Hapus riwayat analisis
+      tags:
+      - history
+  /maqamat:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.MaqamListResponse'
+            type: array
+      summary: Daftar semua maqam yang didukung
+      tags:
+      - maqam
+  /maqamat/{id}:
+    get:
+      parameters:
+      - description: Maqam ID (e.g. hijaz)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.MaqamDetailResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Detail maqam
+      tags:
+      - maqam
   /users:
     get:
       consumes:

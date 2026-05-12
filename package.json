@@ -1,15 +1,15 @@
 {
-  "name": "monorepo_gots_starterkit",
+  "name": "maqam-detector",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "MaqamDetector — Pendeteksi Maqam Musik Arab & Timur Tengah",
+  "private": true,
   "scripts": {
     "dev": "nx run-many -t dev",
     "build": "nx run-many -t build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "nx run-many -t lint"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["maqam", "music", "arab", "banjari", "pitch-detection"],
+  "author": "Anas (Cypress Consulting)",
   "license": "ISC",
   "devDependencies": {
     "nx": "^22.7.1"

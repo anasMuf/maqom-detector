@@ -1,17 +1,13 @@
-// @title           Starter Kit API
-// @version         1.0
-// @description     Ini adalah API starter kit menggunakan Echo Go.
-// @termsOfService  http://swagger.io/terms/
+// @title           MaqamDetector API
+// @version         1.0.0
+// @description     API pendeteksi maqam musik Arab & Timur Tengah untuk komunitas banjari.
 
-// @contact.name   API Support
-// @contact.url    http://www.swagger.io/support
-// @contact.email  support@swagger.io
+// @contact.name   Anas (Cypress Consulting)
 
-// @license.name  Apache 2.0
-// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+// @license.name  ISC
 
 // @host      localhost:8080
-// @BasePath  /api
+// @BasePath  /api/v1
 
 // @securityDefinitions.apikey  ApiKeyAuth
 // @in                          header
@@ -21,14 +17,16 @@ package main
 
 import (
 	"api/config"
+	_ "api/docs"
 	"api/handler"
 	"api/middleware"
 	"api/model"
 	"api/repository"
-	_ "api/docs"
+	"api/seeders"
 	"api/service"
 	"api/utility"
 	"os"
+	"time"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
@@ -40,39 +38,90 @@ func main() {
 	config.LoadEnv()
 	db := config.DBInit()
 
+	// ── Auto-Migrate ────────────────────────────
 	if err := db.AutoMigrate(
 		&model.User{},
+		&model.Session{},
+		&model.Maqam{},
+		&model.Analysis{},
+		&model.AnalysisCandidate{},
 	); err != nil {
 		panic("Gagal auto-migrate tabel: " + err.Error())
 	}
 
-	//repository
-	userRepo := repository.NewUserRepository(db)
-	//service
-	userService := service.NewUserService(userRepo)
-	//handler
-	userHandler := handler.NewUserHandler(userService)
+	// ── Seed Data ───────────────────────────────
+	seeders.SeedMaqamat(db)
 
+	// ── Repository ──────────────────────────────
+	userRepo := repository.NewUserRepository(db)
+	sessionRepo := repository.NewSessionRepository(db)
+	analysisRepo := repository.NewAnalysisRepository(db)
+	maqamRepo := repository.NewMaqamRepository(db)
+
+	// ── Service ─────────────────────────────────
+	userService := service.NewUserService(userRepo)
+	claudeService := service.NewClaudeService()
+	analyzeService := service.NewAnalyzeService(analysisRepo, sessionRepo, claudeService)
+	historyService := service.NewHistoryService(analysisRepo)
+	maqamService := service.NewMaqamService(maqamRepo)
+
+	// ── Handler ─────────────────────────────────
+	userHandler := handler.NewUserHandler(userService)
+	analyzeHandler := handler.NewAnalyzeHandler(analyzeService)
+	historyHandler := handler.NewHistoryHandler(historyService)
+	maqamHandler := handler.NewMaqamHandler(maqamService)
+
+	// ── Echo Setup ──────────────────────────────
 	e := echo.New()
 	e.Validator = &utility.CustomValidator{Validator: validator.New()}
 	e.Use(middleware.MiddlewareLogging)
-	e.Use(echoMiddleware.CORS())
+	e.Use(echoMiddleware.CORSWithConfig(echoMiddleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.DELETE, echo.OPTIONS},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, "X-Session-ID"},
+	}))
 
 	e.HTTPErrorHandler = handler.CustomHTTPErrorHandler
 
+	// ── Rate Limiter ────────────────────────────
+	rateLimiter := middleware.NewRateLimiter(10, 1*time.Hour)
+
+	// ── Routes: Legacy (User/Auth — dari starter kit) ──
 	api := e.Group("/api")
 	api.POST("/users/register", userHandler.CreateUser)
 	api.POST("/users/login", userHandler.LoginUser)
 
-	// Middleware untuk JWT
 	auth := api.Group("")
 	auth.Use(middleware.JWTAuth)
-
-	// GET /api/users
 	auth.GET("/users", userHandler.GetUser)
 
+	// ── Routes: MaqamDetector v1 ────────────────
+	v1 := e.Group("/api/v1")
+	v1.Use(middleware.SessionMiddleware)
+
+	// Analyze (rate limited)
+	analyze := v1.Group("")
+	analyze.Use(rateLimiter.Middleware())
+	analyze.POST("/analyze/youtube", analyzeHandler.AnalyzeYoutube)
+	analyze.POST("/analyze/upload", analyzeHandler.AnalyzeUpload)
+	analyze.POST("/analyze/record", analyzeHandler.AnalyzeRecord)
+
+	// Analysis polling (no rate limit)
+	v1.GET("/analyses/:id", analyzeHandler.GetAnalysis)
+
+	// History
+	v1.GET("/history", historyHandler.GetHistory)
+	v1.DELETE("/history/:id", historyHandler.DeleteHistory)
+
+	// Maqam (public — no session required)
+	maqamGroup := e.Group("/api/v1")
+	maqamGroup.GET("/maqamat", maqamHandler.GetMaqamat)
+	maqamGroup.GET("/maqamat/:id", maqamHandler.GetMaqamByID)
+
+	// ── Swagger ─────────────────────────────────
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
+	// ── Start ───────────────────────────────────
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

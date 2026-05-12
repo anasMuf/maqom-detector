@@ -1,23 +1,353 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Ini adalah API starter kit menggunakan Echo Go.",
-        "title": "Starter Kit API",
-        "termsOfService": "http://swagger.io/terms/",
+        "description": "API pendeteksi maqam musik Arab \u0026 Timur Tengah untuk komunitas banjari.",
+        "title": "MaqamDetector API",
         "contact": {
-            "name": "API Support",
-            "url": "http://www.swagger.io/support",
-            "email": "support@swagger.io"
+            "name": "Anas (Cypress Consulting)"
         },
         "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "name": "ISC"
         },
-        "version": "1.0"
+        "version": "1.0.0"
     },
     "host": "localhost:8080",
-    "basePath": "/api",
+    "basePath": "/api/v1",
     "paths": {
+        "/analyses/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "analyze"
+                ],
+                "summary": "Ambil status/hasil analisis (polling)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Session UUID",
+                        "name": "X-Session-ID",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Analysis UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.AnalysisDetailResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/analyze/record": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "analyze"
+                ],
+                "summary": "Analisis maqam dari rekaman mikrofon/humming",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Session UUID",
+                        "name": "X-Session-ID",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "file",
+                        "description": "Audio recording",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "microphone",
+                        "description": "Mode: microphone atau humming",
+                        "name": "mode",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/dto.AnalyzeAcceptedResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/analyze/upload": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "analyze"
+                ],
+                "summary": "Analisis maqam dari file audio upload",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Session UUID",
+                        "name": "X-Session-ID",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "file",
+                        "description": "File audio (WAV, MP3, M4A, dll.)",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/dto.AnalyzeAcceptedResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    },
+                    "413": {
+                        "description": "Request Entity Too Large",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/analyze/youtube": {
+            "post": {
+                "description": "Memulai proses analisis maqam dari video YouTube secara asinkron",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "analyze"
+                ],
+                "summary": "Analisis maqam dari YouTube URL",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Session UUID",
+                        "name": "X-Session-ID",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "YouTube analysis request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.AnalyzeYoutubeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/dto.AnalyzeAcceptedResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/history": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "history"
+                ],
+                "summary": "Riwayat analisis",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Session UUID",
+                        "name": "X-Session-ID",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Halaman",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Jumlah per halaman",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.HistoryListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/history/{id}": {
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "history"
+                ],
+                "summary": "Hapus riwayat analisis",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Session UUID",
+                        "name": "X-Session-ID",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Analysis UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.SuccessResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/maqamat": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "maqam"
+                ],
+                "summary": "Daftar semua maqam yang didukung",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dto.MaqamListResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/maqamat/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "maqam"
+                ],
+                "summary": "Detail maqam",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Maqam ID (e.g. hijaz)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.MaqamDetailResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/users": {
             "get": {
                 "security": [
@@ -146,6 +476,136 @@
         }
     },
     "definitions": {
+        "dto.AnalysisDetailResponse": {
+            "type": "object",
+            "properties": {
+                "audio_quality": {
+                    "type": "string",
+                    "example": "good"
+                },
+                "candidates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.CandidateResponse"
+                    }
+                },
+                "completed_at": {
+                    "type": "string"
+                },
+                "confidence_label": {
+                    "type": "string",
+                    "example": "tinggi"
+                },
+                "confidence_score": {
+                    "type": "number",
+                    "example": 0.87
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "detected_maqam_id": {
+                    "type": "string",
+                    "example": "hijaz"
+                },
+                "error_code": {
+                    "type": "string"
+                },
+                "error_message": {
+                    "type": "string"
+                },
+                "explanation_text": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "input_source": {
+                    "type": "string",
+                    "example": "https://www.youtube.com/watch?v=..."
+                },
+                "input_type": {
+                    "type": "string",
+                    "example": "youtube"
+                },
+                "processing_ms": {
+                    "type": "integer",
+                    "example": 12500
+                },
+                "status": {
+                    "type": "string",
+                    "example": "completed"
+                }
+            }
+        },
+        "dto.AnalyzeAcceptedResponse": {
+            "type": "object",
+            "properties": {
+                "analysis_id": {
+                    "type": "string",
+                    "example": "550e8400-e29b-41d4-a716-446655440000"
+                },
+                "estimated_seconds": {
+                    "type": "integer",
+                    "example": 30
+                },
+                "polling_url": {
+                    "type": "string",
+                    "example": "/api/v1/analyses/550e8400-e29b-41d4-a716-446655440000"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "pending"
+                }
+            }
+        },
+        "dto.AnalyzeYoutubeRequest": {
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "properties": {
+                "segment_duration": {
+                    "type": "integer",
+                    "maximum": 120,
+                    "minimum": 5,
+                    "example": 60
+                },
+                "segment_start": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "example": 0
+                },
+                "url": {
+                    "type": "string",
+                    "example": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                }
+            }
+        },
+        "dto.CandidateResponse": {
+            "type": "object",
+            "properties": {
+                "confidence_score": {
+                    "type": "number",
+                    "example": 0.87
+                },
+                "maqam_id": {
+                    "type": "string",
+                    "example": "hijaz"
+                },
+                "name_arabic": {
+                    "type": "string",
+                    "example": "حجاز"
+                },
+                "name_latin": {
+                    "type": "string",
+                    "example": "Hijaz"
+                },
+                "rank": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
         "dto.CreateUserRequest": {
             "type": "object",
             "required": [
@@ -161,21 +621,26 @@
                     "type": "string"
                 },
                 "email": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 100
                 },
                 "full_name": {
                     "type": "string",
+                    "maxLength": 100,
                     "minLength": 3
                 },
                 "password": {
                     "type": "string",
+                    "maxLength": 100,
                     "minLength": 6
                 },
                 "phone": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 15
                 },
                 "username": {
                     "type": "string",
+                    "maxLength": 50,
                     "minLength": 3
                 }
             }
@@ -192,6 +657,50 @@
                 },
                 "status": {
                     "type": "integer"
+                }
+            }
+        },
+        "dto.HistoryItemResponse": {
+            "type": "object",
+            "properties": {
+                "confidence_score": {
+                    "type": "number"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "detected_maqam_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "input_source": {
+                    "type": "string"
+                },
+                "input_type": {
+                    "type": "string",
+                    "example": "youtube"
+                },
+                "maqam_name_latin": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.HistoryListResponse": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.HistoryItemResponse"
+                    }
+                },
+                "meta": {
+                    "$ref": "#/definitions/dto.PaginationMeta"
                 }
             }
         },
@@ -215,6 +724,93 @@
             "properties": {
                 "token": {
                     "type": "string"
+                }
+            }
+        },
+        "dto.MaqamDetailResponse": {
+            "type": "object",
+            "properties": {
+                "emotion_tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "example_songs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "interval_description": {
+                    "type": "string"
+                },
+                "name_arabic": {
+                    "type": "string"
+                },
+                "name_indonesia": {
+                    "type": "string"
+                },
+                "name_latin": {
+                    "type": "string"
+                },
+                "tips_aransemen": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.MaqamListResponse": {
+            "type": "object",
+            "properties": {
+                "emotion_tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string",
+                    "example": "hijaz"
+                },
+                "interval_description": {
+                    "type": "string",
+                    "example": "D – E♭ – F♯ – G – A – B♭ – C"
+                },
+                "name_arabic": {
+                    "type": "string",
+                    "example": "حجاز"
+                },
+                "name_indonesia": {
+                    "type": "string",
+                    "example": "Hijaz"
+                },
+                "name_latin": {
+                    "type": "string",
+                    "example": "Hijaz"
+                }
+            }
+        },
+        "dto.PaginationMeta": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "total_items": {
+                    "type": "integer",
+                    "example": 42
+                },
+                "total_pages": {
+                    "type": "integer",
+                    "example": 5
                 }
             }
         },
