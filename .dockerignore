@@ -1,0 +1,10 @@
+node_modules
+.git
+.nx
+.venv
+dist
+.env
+*.log
+.DS_Store
+apps/**/node_modules
+apps/**/dist
