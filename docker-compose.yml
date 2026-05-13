@@ -56,7 +56,7 @@ services:
       analyzer:
         condition: service_healthy
     environment:
-      - PORT=${PORT:-8080}
+      - PORT=8080
       - DB_HOST=maqom-db
       - DB_USER=${DB_USER:-postgres}
       - DB_PASSWORD=${DB_PASSWORD:-postgres}
