@@ -32,13 +32,56 @@ class YouTubeFetchError(Exception):
 
 def validate_youtube_url(url: str) -> bool:
     """Validasi apakah URL adalah YouTube yang valid."""
+    # Strip tracking/sharing params untuk validasi
+    clean = sanitize_youtube_url(url)[0]
     patterns = [
         r"^https?://(www\.)?youtube\.com/watch\?v=[\w-]{11}",
         r"^https?://youtu\.be/[\w-]{11}",
         r"^https?://(www\.)?youtube\.com/shorts/[\w-]{11}",
         r"^https?://m\.youtube\.com/watch\?v=[\w-]{11}",
     ]
-    return any(re.match(pattern, url) for pattern in patterns)
+    return any(re.match(pattern, clean) for pattern in patterns)
+
+
+def sanitize_youtube_url(url: str) -> tuple[str, int]:
+    """
+    Bersihkan URL YouTube dari parameter tracking/sharing yang
+    bisa menyebabkan yt-dlp gagal download.
+
+    Returns:
+        Tuple (clean_url, timestamp_seconds).
+        timestamp_seconds = 0 jika tidak ada parameter &t=.
+    """
+    from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+
+    parsed = urlparse(url)
+    params = parse_qs(parsed.query)
+
+    # Ekstrak timestamp jika ada (bisa dipakai sebagai segment_start)
+    timestamp = 0
+    if "t" in params:
+        try:
+            timestamp = int(params["t"][0])
+        except (ValueError, IndexError):
+            pass
+
+    # Hanya simpan parameter yang diperlukan yt-dlp
+    keep_params = {}
+    if "v" in params:
+        keep_params["v"] = params["v"][0]
+
+    # Rebuild URL bersih
+    clean_query = urlencode(keep_params)
+    clean_url = urlunparse((
+        parsed.scheme,
+        parsed.netloc,
+        parsed.path,
+        "",
+        clean_query,
+        "",
+    ))
+
+    return clean_url, timestamp
 
 
 def get_video_info(url: str) -> dict:
@@ -104,11 +147,14 @@ def download_audio(url: str) -> YouTubeAudioResult:
             code="INVALID_URL",
         )
 
-    # Ambil info video dulu
-    info = get_video_info(url)
+    # Sanitize URL — hapus parameter tracking (si=, t=, feature=)
+    clean_url, timestamp = sanitize_youtube_url(url)
+
+    # Ambil info video dulu (pakai URL bersih)
+    info = get_video_info(clean_url)
     duration = info.get("duration", 0)
     title = info.get("title", "Unknown")
-    channel = info.get("channel", info.get("uploader", "Unknown"))
+    channel = info.get("channel") or info.get("uploader") or "Unknown"
 
     if duration > MAX_DURATION_SECONDS:
         raise YouTubeFetchError(
@@ -134,7 +180,7 @@ def download_audio(url: str) -> YouTubeAudioResult:
                 output_path,
                 "--no-playlist",
                 "--no-warnings",
-                url,
+                clean_url,  # Pakai URL bersih, bukan URL asli
             ],
             capture_output=True,
             text=True,
